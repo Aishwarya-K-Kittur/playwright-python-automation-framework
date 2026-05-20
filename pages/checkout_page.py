@@ -1,17 +1,27 @@
-class CheckoutPage:
+from pages.base_page import BasePage
+
+class CheckoutPage(BasePage):
     def __init__(self, page):
-        self.page = page
+        super().__init__(page)
+        
+        self.first_name = page.locator("#first-name")
+        self.last_name = page.locator("#last-name")
+        self.postal_code = page.locator("#postal-code")
+        self.btn_continue = page.locator("#continue")
+        self.btn_finish = page.locator("#finish")
+        self.complete_header = page.locator(".complete-header")
 
     def fill_checkout_information(self):
-        self.page.locator("#first-name").fill("Aishwarya")
-        self.page.locator("#last-name").fill("K K")
-        self.page.locator("#postal-code").fill("580112")
+
+        self.fill(self.first_name, "Aishwarya")
+        self.fill(self.last_name, "K K")
+        self.fill(self.postal_code, "580112")
 
     def click_continue(self):
-        self.page.locator("#continue").click()
+        self.click(self.btn_continue)
 
     def click_finish(self):
-        self.page.locator("#finish").click()
+        self.click(self.btn_finish)
 
     def get_order_success_message(self):
-        return self.page.locator(".complete-header").text_content()
+        return self.get_text(self.complete_header)
