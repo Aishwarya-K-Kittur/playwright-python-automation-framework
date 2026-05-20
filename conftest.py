@@ -24,7 +24,7 @@ def page(request):
             "--browser"
         )
         browser = getattr(p, browser_name).launch(
-            headless=False,
+            headless=True,
             slow_mo=100,
         )
         context = browser.new_context()
